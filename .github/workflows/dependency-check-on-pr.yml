@@ -32,7 +32,16 @@ jobs:
     # Build Project
     - name: Maven Build
       run: mvn -T1C clean install
-
+    
+    # Cache CVE data downloaded by the tool
+    - name: Cache
+      uses: actions/cache@v1.1.2
+      with:
+        # A directory to store and save the cache
+        path: ./scripts/dependency-check/data
+        # An explicit key for restoring and saving the cache
+        key: dep-check-data
+     
     # Run dependency check
     - name: Run Dependency Check
       run: ./scripts/dependency-check/bin/dependency-check.sh --project "testdep" --scan 'target/*.jar' -o ./scripts/depdendency-check/results --format JSON --prettyPrint
