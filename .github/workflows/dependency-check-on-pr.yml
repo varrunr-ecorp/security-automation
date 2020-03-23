@@ -29,6 +29,10 @@ jobs:
     - name: Install common-crypto
       run: mvn install:install-file -Dfile=lib/common-crypto-1.0-SNAPSHOT.jar -DgroupId=com.company.security.crypto -DartifactId=common-crypto -Dversion=1.0-SNAPSHOT -Dpackaging=jar
       
-    # Runs a single command using the runners shell
+    # Build Project
     - name: Maven Build
       run: mvn -T1C clean install
+
+    # Run dependency check
+    - name: Run Dependency Check
+      run: ./scripts/dependency-check/bin/dependency-check.sh --project "testdep" --scan 'target/*.jar' -o ./scripts/depdendency-check/results --format JSON --prettyPrint
