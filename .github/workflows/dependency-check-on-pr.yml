@@ -46,10 +46,10 @@ jobs:
     - name: Run Dependency Check
       run: ./scripts/dependency-check/bin/dependency-check.sh --project "testdep" --scan 'target/*.jar' -o ./scripts/depdendency-check/results --format JSON --prettyPrint
       
-    - name: Download artifact
-      uses: actions/download-artifact@v1.0.0
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
-        name: dependency-check-report
+        name: dependency-check-report.json
         # Destination path
         path: ./scripts/dependency-check/results/dependency-check-report.json
