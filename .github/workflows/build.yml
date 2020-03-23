@@ -26,7 +26,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-       
+
+    # Install common-crypto by hand. Temporary hack.
+    - name: Install common-crypto
+      run: mvn install:install-file -Dfile=lib/common-crypto-1.0-SNAPSHOT.jar -DgroupId=com.company.security.crypto -DartifactId=common-crypto -Dversion=1.0-SNAPSHOT -Dpackaging=jar
+      
     # Runs a single command using the runners shell
     - name: Maven Build
       run: mvn -T1C clean install
